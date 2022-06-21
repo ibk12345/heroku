@@ -27,8 +27,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         representation=super().to_representation(instance)
-        if instance.author.email:
-            representation['author']=instance.author.email
+        
+        representation['author']=instance.author.email
         # representation['category']=instance.category.title
         # representation['images'] = PostImageSerializer(instance.images.all(),
                                                     #    many=True).data

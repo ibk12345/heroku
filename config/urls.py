@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+# from rest_framework_simplejwt.views import obtai
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -45,6 +45,7 @@ urlpatterns = [
     path('api/v1/', include('apps.product.urls')),
     path('api/v1/shoppingcart/', include('apps.cart.urls')),
     path('api/v1/', include('apps.order.urls')),
+    # path('api-token-auth/', obtain_jwt_token),
 ]
 
 
