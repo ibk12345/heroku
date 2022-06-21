@@ -1,4 +1,4 @@
-from email import message
+from requests import request
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,9 +9,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
-
-
-
 from .serializers import *
 from .models import CustomUser
 from apps.cart.models import ShoppingCart
@@ -20,11 +17,11 @@ User=get_user_model()
 
 class RegistrationView(APIView):
 
-    test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)
-    user_response = openapi.Response('response description', RegistrationSerializer)
+    # test_param = openapi.Parameter('test', openapi.IN_QUERY, description="test manual param", type=openapi.TYPE_BOOLEAN)
+    # user_response = openapi.Response('response description', RegistrationSerializer)
     # @swagger_auto_schema(method='get', manual_parameters=[test_param], responses={200: RegistrationSerializer})
-    @swagger_auto_schema(methods=['post'], request_body=RegistrationSerializer)
-    @api_view(['POST'])
+    @swagger_auto_schema(request_body=RegistrationSerializer)
+    # @api_view(['POST'])
     def post(self,request):
         serializer=RegistrationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):

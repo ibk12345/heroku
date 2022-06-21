@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager,AbstractBaseUser
 from django.core.mail import send_mail
-
-
+from decouple import config
 
 class CustomUserManager(BaseUserManager):
     def _create(self, email, password, name, last_name=None, **extra_fields):
@@ -60,7 +59,7 @@ class CustomUser(AbstractBaseUser):
             self.save()
     
     def send_activation_email(self):
-        activation_url=f'http://localhost:8000/api/v1/account/activate/{self.activation_code}'
+        activation_url=f'{config("LINK")}api/v1/account/activate/{self.activation_code}'
         message=f'''
             You are signed up successfully!
             Activate your account {activation_url}
