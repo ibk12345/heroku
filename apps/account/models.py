@@ -4,35 +4,35 @@ from django.core.mail import send_mail
 from decouple import config
 
 class CustomUserManager(BaseUserManager):
-    def _create(self, email, password, name, last_name=None, **extra_fields):
+    def _create(self, email, password, **extra_fields):
         if not email:
             raise ValueError('Email cannot be empty')
-        user = self.model(email=email, name=name, last_name=last_name, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
         return user
 
-    def create_user(self, email, password, name, last_name=None, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         extra_fields.setdefault('is_active', False)
         extra_fields.setdefault('is_staff', False)
-        return self._create(email, password, name, last_name, **extra_fields)
+        return self._create(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, name, last_name=None, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_active', True)
         extra_fields.setdefault('is_staff', True)
-        return self._create(email, password, name, last_name, **extra_fields)
+        return self._create(email, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser):
     email=models.EmailField(unique=True)
-    name=models.CharField(max_length=50)
-    last_name=models.CharField(max_length=150, blank=True, null=True)
+    # name=models.CharField(max_length=50)
+    # last_name=models.CharField(max_length=150, blank=True, null=True)
     is_active=models.BooleanField(default=False)
     is_staff=models.BooleanField(default=False)
     activation_code=models.CharField(max_length=8, blank=True, null=True)
 
     objects=CustomUserManager()
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=['name', 'last_name']
+    # REQUIRED_FIELDS=['name', 'last_name']
 
 
     def __str__(self):
@@ -60,6 +60,7 @@ class CustomUser(AbstractBaseUser):
     
     def send_activation_email(self):
         activation_url=f'{config("LINK")}api/v1/account/activate/{self.activation_code}'
+        # activation_url=f'api/v1/account/activate/{self.activation_code}'
         message=f'''
             You are signed up successfully!
             Activate your account {activation_url}

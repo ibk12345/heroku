@@ -10,7 +10,7 @@ class RegistrationSerializer(serializers.Serializer):
     email=serializers.EmailField(required=True)
     password=serializers.CharField(min_length=6, required=True)
     password_confirm= serializers.CharField(min_length=6, required=True)
-    name=serializers.CharField(required=True)
+    # name=serializers.CharField(required=True)
 
 
     def validate_email(self,email):

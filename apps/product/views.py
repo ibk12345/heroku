@@ -11,7 +11,8 @@ from rest_framework import filters
 
 from .permissions import IsAuthorOrAdminPermission
 from .serializers import *
-from .models import Favourite, Product, Likes, Product_Image
+from .models import Favourite, Product, Likes
+# , Product_Image
 from apps.product.paginations import ProductPagination
 
 
@@ -98,16 +99,16 @@ class FavouriteView(ListAPIView):
         return queryset
 
 
-class PostImageView(ListCreateAPIView):
-    queryset = Product_Image.objects.all()
-    serializer_class = PostImageSerializer
-    permission_class=[IsAuthenticated,]
+# class PostImageView(ListCreateAPIView):
+#     queryset = Product_Image.objects.all()
+#     serializer_class = PostImageSerializer
+#     permission_class=[IsAuthenticated,]
 
-    def post(self, request, *args, **kwargs):
-        data=request.FILES
-        if data.get('image', 0):
-            return self.create(request, *args, **kwargs)
-        else:
-            return Response("You haven't add any images")
+#     def post(self, request, *args, **kwargs):
+#         data=request.FILES
+#         if data.get('image', 0):
+#             return self.create(request, *args, **kwargs)
+#         else:
+#             return Response("You haven't add any images")
     
 
