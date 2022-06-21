@@ -59,7 +59,7 @@ class CustomUser(AbstractBaseUser):
             self.save()
     
     def send_activation_email(self):
-        activation_url=f'{config("LINK")}api/v1/account/activate/{self.activation_code}'
+        activation_url=f'{config("LINK")}api/v1/account/activate/{self.activation_code}/'
         # activation_url=f'api/v1/account/activate/{self.activation_code}'
         message=f'''
             You are signed up successfully!
