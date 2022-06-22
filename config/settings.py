@@ -15,6 +15,7 @@ from decouple import config
 from datetime import timedelta
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -100,11 +101,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
-        # 'NAME': config('DB_NAME'),
-        # 'USER': config('DB_USER'),
-        # 'PASSWORD': config('DB_PASSWORD'),
-        # 'HOST': config('DB_HOST'),
-        # 'PORT':config('DB_PORT', cast=int)
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT':config('DB_PORT', cast=int)
     }
 }
 import dj_database_url
@@ -152,6 +153,8 @@ AUTH_USER_MODEL = 'account.CustomUser'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+# django_heroku.settings(locals())
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -208,3 +211,4 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+

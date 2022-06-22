@@ -10,7 +10,7 @@ class ProductListSerializer(serializers.ModelSerializer):
         fields=('id', 'name', 'category', 'price', 'image','watch', 'is_published')
     def to_representation(self, instance):
         representation=super().to_representation(instance)
-        representation['author']=instance.author.email
+        # representation['author']=instance.author.email
         # representation['category']=instance.category.title
         representation['reviews']=instance.reviews.all().count()
         return representation
@@ -20,15 +20,15 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         model=Product
         exclude=("author",)
 
-    def validate(self,attrs):
-        request=self.context.get('request')
-        attrs['author']=request.user
-        return attrs
+    # def validate(self,attrs):
+    #     request=self.context.get('request')
+    #     attrs['author']=request.user
+    #     return attrs
     
     def to_representation(self, instance):
         representation=super().to_representation(instance)
         
-        representation['author']=instance.author.email
+        # representation['author']=instance.author.email
         # representation['category']=instance.category.title
         # representation['images'] = PostImageSerializer(instance.images.all(),
                                                     #    many=True).data

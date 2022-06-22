@@ -1,5 +1,5 @@
 from rest_framework.generics import ListCreateAPIView, ListAPIView
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser 
 from rest_framework import viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
 import django_filters.rest_framework as filters
@@ -20,6 +20,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset=Product.objects.all()
     serializer_class=ProductDetailSerializer
     pagination_class = ProductPagination
+    # permission_class=[IsAdminUser,]
     filter_backends=(DjangoFilterBackend,OrderingFilter, SearchFilter)
     filterset_fields = ["is_published", "name"]
     search_fields = ['name']
@@ -39,12 +40,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-    def get_permissions(self):
-        if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAdminUser()]
-        elif self.action in ['toggle_like','favourite']:
-            return [IsAuthenticated()]
-        return []
+    # def get_permissions(self):
+    #     if self.action in ['update', 'partial_update', 'destroy', 'retrieve', 'create']:
+    #         return [IsAdminUser()]
+    #     elif self.action in ['toggle_like','favourite']:
+    #         return [IsAuthenticated()]
+    #     return []
 
     #products/id/toggle_like/
     @action(detail=True, methods=['GET'])
