@@ -33,12 +33,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         else:
             return super().get_serializer_class()
         
-    def retrieve(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        product.watch += 1
-        product.save()
-        serializer = ProductDetailSerializer(product, context={'request':request})
-        return Response(serializer.data)
+    # def retrieve(self, request, pk):
+    #     product = get_object_or_404(Product, pk=pk)
+    #     product.watch += 1
+    #     product.save()
+    #     serializer = ProductDetailSerializer(product, context={'request':request})
+    #     return Response(serializer.data)
 
 
     def get_permissions(self):
