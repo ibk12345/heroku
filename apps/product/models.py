@@ -21,7 +21,7 @@ class Product(models.Model):
     update_date = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     watch = models.PositiveIntegerField(default=0)
-    image=models.ImageField(upload_to='products/', blank=True, null=True)
+    image=models.ImageField(upload_to='products/', blank=True, null=True) #image
 
     def __str__(self):
         return self.name

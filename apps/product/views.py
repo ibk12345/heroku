@@ -20,11 +20,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset=Product.objects.all()
     serializer_class=ProductDetailSerializer
     pagination_class = ProductPagination
-    # permission_class=[IsAdminUser,]
+    
+    # permission_class=[IsAdminUser,]   
     filter_backends=(DjangoFilterBackend,OrderingFilter, SearchFilter)
-    filterset_fields = ["is_published", "name"]
-    search_fields = ['name']
-    ordering_fields=['name', 'price']
+    filterset_fields = ["category"]
+    search_fields = ['category']
+    ordering_fields=['category', 'price']
 
     def get_serializer_class(self):
         if self.action=='list':
@@ -36,7 +37,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         product = get_object_or_404(Product, pk=pk)
         product.watch += 1
         product.save()
-        serializer = ProductDetailSerializer(product)
+        serializer = ProductDetailSerializer(product, context={'request':request})
         return Response(serializer.data)
 
 

@@ -16,9 +16,11 @@ class ProductListSerializer(serializers.ModelSerializer):
         return representation
 
 class ProductDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model=Product
-        exclude=("author",)
+        exclude=("author",)        
+
 
     def validate(self,attrs):
         request=self.context.get('request')
