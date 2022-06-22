@@ -24,7 +24,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
     def validate(self,attrs):
         request=self.context.get('request')
-        print(request)
+
         attrs['author']=request.user
         return attrs
     
