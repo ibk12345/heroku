@@ -41,7 +41,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 
     def get_permissions(self):
-        if self.action in ['update', 'partial_update', 'destroy', 'retrieve', 'create']:
+        if self.action in ['update', 'partial_update', 'destroy', 'create']:
             return [IsAdminUser()]
         elif self.action in ['toggle_like','favourite']:
             return [IsAuthenticated()]
