@@ -40,12 +40,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-    # def get_permissions(self):
-    #     if self.action in ['update', 'partial_update', 'destroy', 'retrieve', 'create']:
-    #         return [IsAdminUser()]
-    #     elif self.action in ['toggle_like','favourite']:
-    #         return [IsAuthenticated()]
-    #     return []
+    def get_permissions(self):
+        if self.action in ['update', 'partial_update', 'destroy', 'retrieve', 'create']:
+            return [IsAdminUser()]
+        elif self.action in ['toggle_like','favourite']:
+            return [IsAuthenticated()]
+        return []
 
     #products/id/toggle_like/
     @action(detail=True, methods=['GET'])

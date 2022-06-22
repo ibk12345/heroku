@@ -11,8 +11,8 @@ class Product(models.Model):
         ('burger', 'Burger'),
         ('main_dishes', 'Main Dishes'),
         ('all', 'All')    )
-    # author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
-    author=models.CharField(max_length=55, blank=True, null=True)
+    author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+    # author=models.CharField(max_length=55, blank=True, null=True)
     name=models.CharField(max_length=150)
     category=models.CharField(choices=CHOICES, max_length=55)
     description=models.TextField()
